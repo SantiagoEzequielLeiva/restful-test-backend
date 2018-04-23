@@ -1,4 +1,4 @@
-package com.sl.sbdemo.modelo;
+package com.sl.sbdemo.model;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
