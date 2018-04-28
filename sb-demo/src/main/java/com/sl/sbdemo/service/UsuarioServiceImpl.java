@@ -24,4 +24,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 		/* ACCEDEMOS DIRECTAMENTE AL METODO DE LA CLASE DE LA CUAL EXTIENDE UsuarioRepository */
 		return this.usuarioRepository.findAll();
 	}
+
+	@Override
+	public void eliminarUsuario(Long id) {
+		/* ACCEDEMOS DIRECTAMENTE AL METODO DE LA CLASE DE LA CUAL EXTIENDE UsuarioRepository */
+		this.usuarioRepository.deleteById(id);
+	}
 }

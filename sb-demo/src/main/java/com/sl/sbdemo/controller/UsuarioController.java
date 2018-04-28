@@ -25,7 +25,7 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService usuarioService;
 
-	private ObjectMapper mapper = new ObjectMapper();
+	private ObjectMapper mapper;
 
 	@GetMapping
 	public List<Usuario> usuarios() {
@@ -35,6 +35,7 @@ public class UsuarioController {
 	@RequestMapping(value = "/guardar", method = RequestMethod.POST)
 	public RestResponse save(@RequestBody String usuarioJson) throws JsonParseException, JsonMappingException, IOException{
 		
+		this.mapper = new ObjectMapper();
 		Usuario usuario = this.mapper.readValue(usuarioJson, Usuario.class);
 		
 		if ( isValid(usuario) ) {
@@ -43,6 +44,18 @@ public class UsuarioController {
 			return new RestResponse(HttpStatus.OK.value(), "El usuario ha sido guardado.");
 		} else {
 			return new RestResponse(HttpStatus.NOT_ACCEPTABLE.value(), "El usuario no cumple con todos los campos requeridos.");
+		}
+	}
+	
+	@RequestMapping(value = "/eliminar", method = RequestMethod.DELETE)
+	public void delete(@RequestBody String usuarioJson) throws Exception {
+		this.mapper = new ObjectMapper();
+		Usuario usuario = this.mapper.readValue(usuarioJson, Usuario.class);
+		
+		if ( usuario.getId() != null ) {
+			this.usuarioService.eliminarUsuario(usuario.getId());
+		} else {
+			throw new Exception("El ID es nulo.");
 		}
 	}
 	
