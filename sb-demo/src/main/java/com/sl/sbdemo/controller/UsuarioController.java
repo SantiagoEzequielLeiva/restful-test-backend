@@ -19,7 +19,7 @@ import com.sl.sbdemo.model.Usuario;
 import com.sl.sbdemo.service.UsuarioService;
 import com.sl.sbdemo.util.RestResponse;
 
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins="http://localhost:4200", maxAge = 3600)
 @RestController
 @RequestMapping({"/usuarios"})
 public class UsuarioController {
