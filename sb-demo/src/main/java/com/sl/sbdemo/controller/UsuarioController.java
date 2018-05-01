@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -49,13 +50,15 @@ public class UsuarioController {
 		}
 	}
 	
-	@RequestMapping(value = "/eliminar", method = RequestMethod.DELETE)
-	public void delete(@RequestBody String usuarioJson) throws Exception {
-		this.mapper = new ObjectMapper();
-		Usuario usuario = this.mapper.readValue(usuarioJson, Usuario.class);
-		
-		if ( usuario.getId() != null ) {
-			this.usuarioService.eliminarUsuario(usuario.getId());
+	@RequestMapping(value = "/{usuario}", method = RequestMethod.GET)
+	public Usuario get(@PathVariable Long usuario) {
+		return this.usuarioService.get(usuario);
+	}
+	
+	@RequestMapping(value = "/{usuario}", method = RequestMethod.DELETE)
+	public void delete(@PathVariable Long usuario) throws Exception {
+		if ( !usuario.equals(null) ) {
+			this.usuarioService.eliminarUsuario(usuario);
 		} else {
 			throw new Exception("El ID es nulo.");
 		}

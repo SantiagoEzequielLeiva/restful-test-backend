@@ -7,6 +7,13 @@ import com.sl.sbdemo.model.Usuario;
 public interface UsuarioService {
 
 	/**
+	 * Se obtiene por su Id
+	 * @param id
+	 * @return Usuario
+	 */
+	Usuario get(Long id);
+	
+	/**
 	 * Se crea el usuario en caso que no exista y se actualiza si existe.
 	 * @param usuario
 	 * @return Usuario

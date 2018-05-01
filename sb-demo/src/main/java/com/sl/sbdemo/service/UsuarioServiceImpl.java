@@ -1,6 +1,7 @@
 package com.sl.sbdemo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public void eliminarUsuario(Long id) {
 		/* ACCEDEMOS DIRECTAMENTE AL METODO DE LA CLASE DE LA CUAL EXTIENDE UsuarioRepository */
 		this.usuarioRepository.deleteById(id);
+	}
+
+	@Override
+	public Usuario get(Long id) {
+		/* ACCEDEMOS DIRECTAMENTE AL METODO DE LA CLASE DE LA CUAL EXTIENDE UsuarioRepository */
+		return this.usuarioRepository.findById(id).get();
 	}
 }
